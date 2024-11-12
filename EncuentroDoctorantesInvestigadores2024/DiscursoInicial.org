@@ -23,7 +23,7 @@
 #+latex_footnote_command: \footnote{%s%s}
 #+latex_engraved_theme:
 #+latex_compiler: pdflatex
-#+date: \today
+
 
 
 
@@ -39,8 +39,10 @@ colaboración y el intercambio de conocimiento entre la academia y la
 industria.
 
 * Introducción
-Cuando piens en la relacion entre la ciencia y la industria, considero
-las siguientes frases de uno de mias autores favoritos Isaac Asimov:
+Cuando pienso en la relación entre la ciencia y la industria,
+considero que las siguientes frases de uno de mis autores favoritos,
+Isaac Asimov, son vigentes y aplican sobre la relación dinámica e
+interdependiente entre ellas:
 #+begin_quote
 La ciencia y la tecnología son las herramientas que nos permiten
 transformar el mundo
@@ -54,12 +56,31 @@ La ciencia avanza a través de la curiosidad y la exploración, mientras
 que la industria se mueve con la eficiencia y la producción.
 #+end_quote
 
-El tema de
-nuestro encuentro, *Uniendo la Academia con la Industria*, no podría
-ser más relevante en el contexto actual. Vivimos en una era donde la
-innovación y el desarrollo tecnológico son fundamentales para
-enfrentar los desafíos globales. Y es precisamente en eventos como
-este donde se siembran las semillas de las soluciones del mañana.
+Si bien desde una perspectiva dialéctica se podría afirmar que la
+relación entre ciencia e industria es hasta antagónica; pues, la
+primera busca el conocimiento y la verdad, mientras que la segunda se
+enfoca en la aplicación práctica e incluso rentable de los
+descubrimientos científicos, mas bien nos indica que la relación entre
+ciencia e industria es un *proceso continuo* de influencia mutua y
+transformación:
+
+#+begin_quote
+Los avances científicos impulsan la innovación industrial, y las
+necesidades de la industria a menudo dirigen la investigación
+científica
+#+end_quote
+
+Es por esto que El tema de nuestro encuentro, *Uniendo la Academia con
+la Industria*, no podría ser más relevante en el contexto actual. Los
+continuos desafíos de la sociedad son un punto de partida para la
+investigación y desarrollo científico. El poder transferir el
+conocimiento científico y hacer que resuelva una problemática real, no
+sólo que enriquece al investigador, sino tanto a la ciencia como a la sociedad.
+
+Vivimos en una era donde la innovación y el
+desarrollo tecnológico son fundamentales para enfrentar los desafíos
+globales. Y es precisamente en eventos como este donde se siembran las
+semillas de las soluciones del mañana.
 
 * Importancia de la Colaboración
 
