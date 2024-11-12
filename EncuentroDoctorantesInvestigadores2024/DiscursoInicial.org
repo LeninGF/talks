@@ -40,29 +40,39 @@ industria.
 
 * Introducción
 Cuando pienso en la relación entre la ciencia y la industria,
-considero que las siguientes frases de uno de mis autores favoritos,
-Isaac Asimov, son vigentes y aplican sobre la relación dinámica e
-interdependiente entre ellas:
+encuentro inspiración en frases del pensamiento de uno de mis autores
+favoritos: Isaac Asimov; pues, hablan de la estrecha y compleja
+relación que hay entre ciencia e industria:
 #+begin_quote
 La ciencia y la tecnología son las herramientas que nos permiten
 transformar el mundo
 #+end_quote
+Los conocimientos científicos por sí mismos enriquecen la cultura
+humana tanto a un nivel teórico como cuando la ingeniería los aplica
+en productos, servicios y tecnología que beneficia a nuestra
+comunidad. Pero estos conocimientos son estériles si se divorcian de
+la realidad material y social a la que se deben y con la que
+interactúan.
 #+begin_quote
 La ciencia es una búsqueda continua de la verdad, mientras que la
 industria es la aplicación práctica de esa verdad
 #+end_quote
-#+begin_quote
-La ciencia avanza a través de la curiosidad y la exploración, mientras
-que la industria se mueve con la eficiencia y la producción.
-#+end_quote
+Si bien esta frase, desde una perspectiva dialéctica, muestra una
+relación antagónica entre ciencia e industria (pues, la primera busca
+el conocimiento y la verdad, mientras que la segunda se enfoca en la
+aplicación práctica e incluso rentable de los descubrimientos y
+conocimientos científicos), en realidad nos explica que la relación
+entre ambas es un *proceso continuo* de *influencia mutua*
+y *transformación* i.e. un conflicto beneficioso.
 
-Si bien desde una perspectiva dialéctica se podría afirmar que la
-relación entre ciencia e industria es hasta antagónica; pues, la
-primera busca el conocimiento y la verdad, mientras que la segunda se
-enfoca en la aplicación práctica e incluso rentable de los
-descubrimientos científicos, mas bien nos indica que la relación entre
-ciencia e industria es un *proceso continuo* de influencia mutua y
-transformación:
+Es por esto, que el tema de nuestro encuentro, *Uniendo la Academia
+con la Industria*, no podría ser más relevante en el contexto
+actual. Los continuos desafíos de la sociedad y la industria son un
+punto de partida para la investigación y desarrollo científico. Así
+como el contacto del industrial con los avances científicos, le
+permiten mantenerse a la vanguardia. El poder transferir el conocimiento científico y
+hacer que resuelva una problemática real, no sólo que enriquece al
+investigador, sino tanto a la ciencia como a la sociedad.
 
 #+begin_quote
 Los avances científicos impulsan la innovación industrial, y las
@@ -70,12 +80,8 @@ necesidades de la industria a menudo dirigen la investigación
 científica
 #+end_quote
 
-Es por esto que El tema de nuestro encuentro, *Uniendo la Academia con
-la Industria*, no podría ser más relevante en el contexto actual. Los
-continuos desafíos de la sociedad son un punto de partida para la
-investigación y desarrollo científico. El poder transferir el
-conocimiento científico y hacer que resuelva una problemática real, no
-sólo que enriquece al investigador, sino tanto a la ciencia como a la sociedad.
+
+
 
 Vivimos en una era donde la innovación y el
 desarrollo tecnológico son fundamentales para enfrentar los desafíos
