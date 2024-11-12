@@ -1,0 +1,131 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil expand-links:t f:t
+#+options: inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: Discurso Inicial Evento
+#+date: 2024-11-11
+#+author: Lenin G. Falconí
+#+email: lenin.falconi@epn.edu.ec
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 27.1 (Org mode 9.7.5)
+#+cite_export:
+
+#+latex_class: article
+#+latex_class_options:
+#+latex_header:
+#+latex_header_extra:
+#+description:
+#+keywords:
+#+subtitle:
+#+latex_footnote_command: \footnote{%s%s}
+#+latex_engraved_theme:
+#+latex_compiler: pdflatex
+#+date: \today
+
+
+
+* Saludo y Agradecimiento
+
+Buenos días a todos,
+
+Es un honor y un privilegio estar aquí hoy, en la inauguración del
+**Encuentro de Doctorantes e Investigadores 2024**. Quiero agradecer a
+los organizadores por la invitación y a todos ustedes por su
+presencia. Este evento es una oportunidad para fomentar la
+colaboración y el intercambio de conocimiento entre la academia y la
+industria.
+
+* Introducción
+Cuando piens en la relacion entre la ciencia y la industria, considero
+las siguientes frases de uno de mias autores favoritos Isaac Asimov:
+#+begin_quote
+La ciencia y la tecnología son las herramientas que nos permiten
+transformar el mundo
+#+end_quote
+#+begin_quote
+La ciencia es una búsqueda continua de la verdad, mientras que la
+industria es la aplicación práctica de esa verdad
+#+end_quote
+#+begin_quote
+La ciencia avanza a través de la curiosidad y la exploración, mientras
+que la industria se mueve con la eficiencia y la producción.
+#+end_quote
+
+El tema de
+nuestro encuentro, *Uniendo la Academia con la Industria*, no podría
+ser más relevante en el contexto actual. Vivimos en una era donde la
+innovación y el desarrollo tecnológico son fundamentales para
+enfrentar los desafíos globales. Y es precisamente en eventos como
+este donde se siembran las semillas de las soluciones del mañana.
+
+* Importancia de la Colaboración
+
+La colaboración entre la academia y la industria es esencial por
+varias razones. En primer lugar, permite que el conocimiento generado
+en las universidades y centros de investigación se traduzca en
+aplicaciones prácticas que beneficien a la sociedad. Los avances
+científicos no deben quedarse en los laboratorios; deben llegar a las
+empresas, a las políticas públicas y, en última instancia, a las
+personas.
+
+Además, el proceso inverso también es válido y sumamente
+importante. Tomar contacto con los problemas reales de la industria
+permite a la academia desarrollar soluciones específicas y
+efectivas. Estas soluciones no solo abordan necesidades inmediatas,
+sino que también pueden anticipar y mitigar futuros desafíos. Por
+ejemplo, la colaboración con la industria puede inspirar
+investigaciones en nuevas tecnologías sostenibles, mejorar procesos de
+producción, o incluso desarrollar tratamientos médicos innovadores.
+
+* Objetivos del Evento
+
+Este encuentro tiene varios objetivos específicos que subrayan su
+importancia:
+
+1. **Espacio de Intercambio:** Crear un espacio donde estudiantes de
+   doctorado, maestría e investigadores puedan compartir sus
+   experiencias y resultados de investigación. Este intercambio es
+   vital para generar sinergias y nuevas oportunidades de
+   colaboración.
+
+2. **Difusión de Avances:** Dar a conocer los avances más recientes en
+   investigación a la comunidad académica, empresarial, y a organismos
+   gubernamentales y no gubernamentales. La transferencia de
+   conocimiento es crucial para el impacto social de la ciencia.
+
+3. **Redes Multidisciplinarias:** Consolidar y expandir las redes de
+   investigación multidisciplinarias. La colaboración entre diferentes
+   disciplinas e instituciones es fundamental para abordar problemas
+   complejos de manera integral.
+
+4. **Formación de Nuevos Talentos:** Destacar la importancia de la
+   formación doctoral y de maestría en la generación de nuevo
+   conocimiento y en el desarrollo de soluciones innovadoras. Los
+   estudiantes de hoy son los líderes y pioneros del mañana.
+
+* Impacto Social y Económico
+
+La sinergia entre la academia y la industria no solo impulsa la
+innovación, sino que también tiene un impacto significativo en la
+economía y la sociedad. Las investigaciones aplicadas pueden conducir
+a la creación de nuevas empresas, la generación de empleo y el
+desarrollo de tecnologías que mejoren la calidad de vida.
+
+* Conclusión 
+
+En conclusión, eventos como el Encuentro de Doctorantes e
+Investigadores 2024 son fundamentales para construir puentes entre la
+academia y la industria. Nos permiten compartir conocimientos,
+establecer colaboraciones y, lo más importante, trabajar juntos para
+enfrentar los desafíos globales.
+
+Les invito a aprovechar al máximo esta oportunidad, a participar
+activamente en las discusiones y a construir relaciones que perduren
+más allá de este evento. Juntos, podemos hacer una diferencia
+significativa.
+
+Muchas gracias.
+
