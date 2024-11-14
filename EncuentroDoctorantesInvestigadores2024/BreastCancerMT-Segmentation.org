@@ -3,7 +3,9 @@
 #+options: d:(not "LOGBOOK") date:t e:t email:nil expand-links:t f:t
 #+options: inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
 #+options: tasks:t tex:t timestamp:t title:t toc:nil todo:t |:t
+
 #+title: Model Development and Evaluation for Image Segmentation in Breast Cancer Mammography and Thermography
+#+subtitle: 
 #+date: 2024-11-13
 #+author: Lenin G. Falconí
 #+email: lenin.falconi@epn.edu.ec
@@ -20,9 +22,10 @@
 #+beamer_font_theme:
 #+beamer_inner_theme:
 #+beamer_outer_theme:
-#+beamer_header:
-
+#+beamer_header: \title[Image Segmenation in BC]{Model Development and Evaluation for Image Segmentation in Breast Cancer Mammography and Thermography}
+#+beamer_short_title: Image Segmentation
 #+LATEX_HEADER: \usepackage{graphicx}
+
 
 
 #+begin_comment
@@ -37,39 +40,239 @@ Esto para colocar la tabla de contenidos
 #+TOC: headlines 3
 #+end_comment
 
+
+#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}\frametitle{Outline}\tableofcontents[currentsection]\end{frame}}
+
+
 #+LATEX_HEADER: \AtBeginDocument{\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{./images/Formato-Logos-Superior.png}}}
 
 #+LATEX: \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{./images/Formato-Limpio.png}}
 *** Contenido
 \tableofcontents
 
-* Seccion 1
-** Slide 1.1
+* Introducción
+** Objetivo
 #+LATEX: \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{./images/Formato-Limpio.png}}
-*** Slide 1.1
-- bla
-- bla
-- bla
+*** Objetivo
+- Introducir al público general sobre las aplicaciones actuales de Aprendizaje Automático y Visión Artificial en Medicina
+- Comprender conceptos clave de Computer Vision (CV), Machine Learning (ML), Deep Learning (DL)
+- Explorar el problema de segmentación para imágenes de Termografía y Mamografía en Cáncer de Mama
 
-** Slide 1.2
-*** Slide 1.2
-- bla
-- bla
-- bla
-** Slide 1.3
-*** Slide 1.3
-- bla
-- bla
-- bla
-* Seccion 2
-** Slide 2.1
-*** Slide 2.1
-** Slide 2.2
-*** Slide 2.2
+** ¿Por qué es relevante este tema?
+*** ¿Por qué es relevante este tema?
+**** Texto                                                            :Texto:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- El cáncer de mama es la principal causa de mortalidad en las mujeres
+  ecuatorianas.
+- Se prevé que el número de casos de cáncer superará los 20 millones de nuevos casos en 2025.
+- La detección temprana es crucial para mejorar las tasas de supervivencia.
 
-** Slide 2.3
-#+LATEX: \usebackgroundtemplate{}
-*** Slide 2.3
+**** Imagen                                                          :Imagen:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+CAPTION: Mortalidad de  Cáncer en  Ecuador Globocan
+[[file:images/breast-cancer/mortality-ec.png]]
+*** ¿Por qué es relevante este tema?
+:PROPERTIES:
+:BEAMER_opt: allowframebreaks
+:END:
+**** Texto                                                      :Texto:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- El examen de mamografía es considerado la principal modalidad para detección temprana
+- El 10% de todas las mujeres sometidas a examen son llamadas para pruebas adicionales.
+- Sólo el 0,5% de ellas son diagnosticadas con cáncer de mama.
+- Los sistemas asistidos por computador (CAD) permiten
+  reducir la carga de trabajo del radiólogo
+#+begin_comment
+- La segmentación precisa de
+  imágenes médicas es esencial para identificar y delinear áreas
+  sospechosas, lo que facilita el diagnóstico y tratamiento oportunos.
+#+end_comment
+**** Imagen                                                    :Imagen:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+\centering
+[[file:images/breast-cancer/mamografia.jpg]]
+
+* IA y Medicina
+** Machine Learning en Medicina
+*** Machine Learning en Medicina
+**** Imagen1                                                  :Imagen1:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+caption:[[https://www.mathworks.com/company/mathworks-stories/xfinito-develops-smart-shoe-with-ai-for-diabetic-neuropathy.html][Combining Artificial Intelligence and Footwear Improves Diabetes Treatment]]
+[[./images/breast-cancer/shoeDiabetes.jpg]]
+**** Imagen2                                                  :Imagen2:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+caption: [[https://www.mathworks.com/company/mathworks-stories/battelle-neurolife-system-turns-thoughts-into-movement.html][Reconnecting the Brain After Paralysis Using Machine Learning]]
+[[./images/breast-cancer/brainML.jpg]]
+** Informe McKinsey 2021
+*** Áreas de Impacto de IA en Salud
+\centering
+#+caption:
+[[./images/breast-cancer/SVG-AI-in-healthcare-ex1.png]]
+
+*** Informe McKinsey 2021
+- Se estima que para el 2050, uno de cada cuatro ciudadanos de Europa
+  y América del Norte tendrá una edad superior a 65 años.
+- Integrar IA en medicina para enfrentar la creciente demanda de servicios.
+- La construcción de sistemas de IA en la salud puede afectar
+  positivamente mejorando la productividad y la eficiencia del
+  cuidado.
+
+*** Áreas de Oportunidad
+- Nivel de digitalización se estima de un 35%
+- Requiere trabajo interdisciplinario y colaborativo
+- Gestión de calidad en estudios de caso y evaluación del desempeño de modelos
+- Inclusión de personal médico en etapas de diseño
+- Desarrollar agencias regionales para la estrategia de IA en Salud
+- Definir estándares para la digitalizacóny gestión de riesgos
+* Conceptos Básicos de Machine Learning
+** Conceptos de Machine Learning
+*** ¿Qué es Machine Learning?
+#+ATTR_LATEX: :height 0.8\textheight
+[[./images/breast-cancer/AIMLDL2.png]]
+*** ¿Qué es Machine Learning?
+
+#+begin_quote
+Se dice que un programa de computadora aprende de una experiencia $E$
+con respecto a un tipo de tarea $T$, y medida de desempeño $P$, si su
+desempeño en la tarea $T$, medida conforme a $P$, mejora con la
+experiencia $E$
+#+end_quote
+
+*** ¿Cómo funciona Machine Learning?
+El problema del aprendizaje automático se centra en ajustar un modelo
+$f$ (i.e.entrenar el modelo) encontrando un conjunto de
+parámetros $\mathbf{\theta}$ que minimice el riesgo empírico, definido
+en la ecuación \eqref{eq:optimizacion}, sobre un conjunto de datos de
+entrenamiento $\mathbf{\mathcal{X}}$, utilizando una medida del error
+especificada en \eqref{eq:funcion_coste}.
+
+    \begin{equation}\label{eq:optimizacion}
+        \hat{\mathbf{\theta}} = \underset{\theta}{\mathrm{argmin}}\,\mathcal{L}(\theta)
+    \end{equation}
+
+    \begin{equation}\label{eq:funcion_coste}
+        \mathcal{L}(\theta)  \triangleq \frac{1}{N}\sum_{n=1}^N\ell(y_n,f(\mathbf{x}_n;\mathbf{\theta}))
+    \end{equation}
+
+*** ¿Qué es Deep Learning y por qué Importa?
+**** Texto                                                      :Texto:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+- Usa redes neuronales artificiales con muchas capas
+- Es capaz de aprender y extraer características complejas de manera automática
+- Rendimiento superior en:
+  + reconocimiento de imágenes
+  + procesamiento de lenguaje natural
+**** Imagen                                                    :Imagen:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.6
+:END:
+[[./images/breast-cancer/vgg16.png]]
+*** Evolución de Modelos de Deep Learning
+#+ATTR_LATEX: :width 0.8\textwidth
+[[./images/breast-cancer/DL-evol.png]]
+
+*** Problemas de Visión Artificial
+[[./images/breast-cancer/TareasComputerVision.png]]
+*** Image Segmentation
+- **Segmentación:** Agrupamiento de pixels de una imagen según medidas
+  de similitud
+- **Segmentación Semántica:** Proceso de visión artificial que
+  particiona una imagen en segmentos que corresponde a una clase
+*** Image Segmentation
+**** Imagen 1                                                 :Imagen1:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+[[./images/breast-cancer/semanticsegmentation1.jpg]]
+**** Imagen 2                                                 :Imagen2:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+[[./images/breast-cancer/semanticsegmentation2.jpg]]
+*** Image Segmentation
+**** Imagen 1                                                 :Imagen1:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+[[./images/breast-cancer/termografia.png]]
+**** Imagen 2                                                 :Imagen2:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+[[./images/breast-cancer/medicalImageSegmentation.jpg]]
+
+* Modalidades de Imagen Médica
+** Modalidades de Imagen Médica
+*** Mamografía
+**** Texto                                                      :Texto:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- Utiliza rayos X de baja energía.
+- Capta imágenes del tejido mamario.
+- Considerado el /Gold Standard/
+- Es Invasivo.
+- Su sensibilidad es inversamente proporcional a la densidad de la
+  mama.
+**** Imagen                                                    :Imagen:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+[[./images/breast-cancer/mamografia.jpg]]
+*** Termografía
+**** Texto                                                      :Texto:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- Medición de temperaturas
+- Generación de imágenes térmicas
+- Detecta la radiación infrarroja del cuerpo/objeto
+- La actividad metabólica de las células cancerosas cambia el perfil
+  de temperatura en la región mamaria.
+**** Imagen                                                    :Imagen:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+[[./images/breast-cancer/thermography1.png]]
+
+* Investigación y Desarrollo
+** Publicaciones realizadas
+*** Publicaciones Realizadas
+- Colocar tabla de publicaciones realizadas
+*** Trabajos Actuales y Futuros
+- Investigar la aplicación de nuevos modelos en los problemas de
+  segmentación de imágenes médicas para cáncer de Mama:
+  1. Vision Transformers
+  2. Convolutional Neural Networks
+- Comparar desempeños y hacer un /trade-off/ de la precisión y el
+  coste computacional
+
+* Conclusiones
+** Conclusiones
+*** Conclusiones
+
+* Preguntas
+** Preguntas
+** Preguntas
+
+#+begin_comment
+,#+LATEX: \usebackgroundtemplate{}
+,*** Slide 2.3
 - bla
 - bla
 - bla
+#+end_comment
