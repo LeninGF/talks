@@ -54,6 +54,9 @@ Esto para colocar la tabla de contenidos
 *** Contenido
 \tableofcontents
 
+*** Enlace a la Presentación
+#+attr_latex: :width 0.6\textwidth :height 0.8\textheight 
+[[./images/qrcode.png]]
 * Introducción
 
 #+LATEX: \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{./images/Formato-Limpio.png}}
