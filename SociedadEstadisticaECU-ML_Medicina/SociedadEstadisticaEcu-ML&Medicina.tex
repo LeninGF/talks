@@ -1,0 +1,1929 @@
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, english]{babel}
+\usepackage{dcolumn}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{animate}
+\usepackage{movie15}
+\usepackage{media9}
+\usepackage{soul}
+\usepackage{amsthm}
+\usepackage{caption}
+\usepackage{dirtytalk}
+\usepackage{hyperref}
+% Math Styles
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{mathrsfs}
+
+\DeclareMathOperator{\ypred}{\phi}  %options \hslash
+\DeclareMathOperator{\ypredtarget}{\phi^{T}}
+\DeclareMathOperator{\ypredsource}{\phi^{S}}
+\DeclareMathOperator{\ConvNetOut}{\mathcal{A}}
+
+% diagramas inteligentes
+
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
+\usepackage{tabularx, colortbl}
+\usepackage{tabu}
+
+% There are many different themes available for Beamer. A comprehensive
+% list with examples is given here:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+% You can uncomment the themes below if you would like to use a different
+% one:
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{boxes}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{default}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+% \usetheme{Luebeck}
+\usetheme{Madrid}
+% \usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+% \usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% Bibliografia
+\usepackage[backend=biber,style=apa,maxcitenames=3]{biblatex}
+\addbibresource{proposal.bib}
+
+\setbeamertemplate{headline}
+{
+   \leavevmode%
+   \hbox{%
+   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{section in head/foot}%
+     \usebeamerfont{section in head/foot}\thesection.\ \insertsectionhead\hspace*{2ex}
+   \end{beamercolorbox}%
+   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{subsection in head/foot}%
+     \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertsubsectionhead
+   \end{beamercolorbox}}%
+   \vskip0pt%
+}
+
+\title[ML en Medicina]{Aplicaciones del Machine Learning en la predicción del diagnóstico de las patologías médicas
+}
+
+% A subtitle is optional and this may be deleted
+\subtitle{Sociedad Estadística Ecuatoriana}
+
+% \author{Lenin G. Falcon\'{i}\inst{1} \and Mar\'{i}a P\'{e}rez\inst{1}  \and Wilbert G. Aguilar\inst{1} \and Aura Conci\inst{2}}
+\author{Mar\'{i}a P\'{e}rez \and Lenin G. Falcon\'{i} }
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+
+\institute[] % (optional, but mostly needed)
+{
+%   \inst{1}%
+%   Systems Engineering Faculty\\
+  Escuela Politécnica Nacional
+%   \and
+%   \inst{2}%
+%   Department of Theoretical Philosophy\\
+%   Universidade Federal Fluminense
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{Quito, Junio 2023}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+%\subject{Theoretical Computer Science}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+% =================================================================
+% Habilitar para logo de la EPN
+% \pgfdeclareimage[height=1.0cm]{university-logo}{LOGO_EPN.jpg}
+% \logo{\pgfuseimage{university-logo}}
+% =================================================================
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+
+% \AtBeginSubsection[]
+% {
+%   \begin{frame}<beamer>{Outline}
+%     \tableofcontents[currentsection,currentsubsection]
+%   \end{frame}
+% }
+
+% Current section
+\AtBeginSection[ ]
+{
+\begin{frame}{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+% Let's get started
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Temario}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+% Section and subsections will appear in the presentation overview
+% and table of contents.
+
+
+\section{Introducción}
+
+\begin{frame}{¿Qué es Machine Learning y Por qué Importa?}
+    \centering
+    \includegraphics[width=\textwidth]{images2/QuitaTrabajos.jpg}
+
+\end{frame}
+
+\begin{frame}{¿Qué es Machine Learning? y ¿Por qué Importa?}
+    \begin{itemize}
+        \item Innovaciones en el campo de la Inteligencia Artificial son principalmente en Machine Learning y en Visión Artificial y el Procesamiento de Lenguaje
+        \item Exista confusión entre las personas respecto de lo que se espera que un \textit{sistema inteligente} haga y sea con lo que en realidad puede realizar
+        \item La aplicación de la Inteligencia Artificial en las distintas actividades de la sociedad humana implica un debate ético y de seguridad
+    \end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}{¿Es lo mismo Machine Learning que IA?}
+    % \begin{columns}[T]
+    % \begin{column}{0.5\textwidth}
+       \textcolor{blue}{El aprendizaje automático es una aplicación de la IA} que tiene por objetivo el desarrollo de algoritmos, que por medio del procesamiento de grandes cantidades de datos, sean capaces de extraer patrones en los datos de manera automática que le permiten resolver tareas complejas sin programación explícita\\
+       \medskip
+    % \end{column}
+    % \begin{column}{0.5\textwidth}
+        \centering
+        % \includegraphics[width=.8\textwidth]{images2/AIMLDL2.png}      
+        \includegraphics[height=.5\textheight, width=0.5\textwidth]{images2/AIMLDL2.png}      
+    % \end{column}
+  % \end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Machine Learning}
+     Se dice que un programa de computadora aprende de una experiencia $E$ con respecto a un tipo de tarea $T$, y medida de desempeño $P$, si su desempeño en la tarea $T$, medida conforme a $P$, mejora con la experiencia $E$ \parencite{mitchell2007machine}
+
+    \begin{equation}\label{eq:optimizacion}
+        \hat{\mathbf{\theta}} = \underset{\theta}{\mathrm{argmin}}\,\mathcal{L}(\theta)
+    \end{equation}
+
+    \begin{equation}\label{eq:funcion_coste}
+        \mathcal{L}(\theta)  \triangleq \frac{1}{N}\sum_{n=1}^N\ell(y_n,f(\mathbf{x}_n;\mathbf{\theta}))
+    \end{equation}
+     
+\end{frame}
+
+\begin{frame}{¿Cómo funciona el Aprendizaje Automático?}
+    El problema de aprendizaje automático consiste en un problema de ajuste de un modelo $f$ (i.e. entrenamiento del modelo) para encontrar un juego de parámetros $\mathbf{\theta}$ que minimice el riesgo empírico, definido en \eqref{eq:optimizacion}, sobre un conjunto de datos de entrenamiento $\mathbf{\mathcal{X}}$, usando una medida del error \eqref{eq:funcion_coste}
+    \\
+    \textcolor{blue}{Problema}: $f$ es desconocida
+\end{frame}
+
+\begin{frame}{Desigualdad de Hoeffding}
+    Con suficientes datos, la distribución de probabilidad del error en el dataset de prueba $E_{out}$ debe aproximar la distribución de probabilidad del error en el dataset de entrenamiento $E_{out}$
+
+    \begin{equation}\label{eq:hoefdding}
+        \mathbb{P}[|E_{in}(g) - E_{out}(g)|>\epsilon] \leq 2Me^{-2\epsilon^2N}
+    \end{equation}
+
+    \begin{equation}\label{eq:limiteGeneralizacion}
+        E_{out}(g) = E_{in}(g)+\sqrt{\frac{1}{2N}\ln\frac{2M}{\delta}}
+    \end{equation}
+    
+\end{frame}
+
+
+\begin{frame}{Limitaciones Teóricas: Inteligencia vs Inteligencia Artificial}
+    \centering
+    \includegraphics[height=0.7\textheight]{images2/RobotTeachingHumanHow2UseCalculator.jpg}
+    \url{https://huggingface.co/tasks/text-to-image}
+\end{frame}
+\begin{frame}{Limitaciones Teóricas: Inteligencia vs Inteligencia Artificial}
+    % \begin{itemize}
+        % \item 
+        \centering
+        \say{¡Teoría! -exclamó-. ¡Teoría! Eso es lo importante. Un técnico trabaja en un problema. A tontas  y a locas. Pierde siglos. No llega a nada. Va al azar de un lado a otro. Un verdadero científico, en cambio, recurre a la teoría. Deja que la matemática resuelva sus problemas.} \\
+        Dr. Prosser en No tan definitivo de \citeauthor{asimov1990cuentos}
+
+        % \item 
+
+\end{frame}
+
+
+\begin{frame}{Limitaciones Teóricas: Inteligencia vs Inteligencia Artificial}
+        % \item 
+        \centering
+        \say{Como resultado, el aprendizaje automático y especialmente el aprendizaje profundo exhiben una teoría matemática comparativamente pequeña, tal vez demasiado pequeña, y es fundamentalmente una disciplina de ingeniería. A diferencia de la física teórica o las matemáticas, el aprendizaje automático es un campo muy práctico impulsado por hallazgos empíricos y profundamente dependiente de los avances en software y hardware}\\
+        \textcite{chollet2021deep} en \citetitle{chollet2021deep}
+    % \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Limitaciones Teóricas: Inteligencia vs Inteligencia Artificial}
+    \begin{itemize}
+        \item No existe una definición aceptada de IA \parencite{wang2019defining}
+        \item El problema está relacionado a definir \emph{inteligencia}
+        \item Es necesario determinar cómo medir la inteligencia de un Sistema para poder compararlo con otros y con la inteligencia humana \parencite{chollet2019measure} en  \citetitle{chollet2019measure}
+        \item El no disponer de una respuesta satisfactoria a la definición de Inteligencia Artificial es muestra de la inmadurez del campo \parencite{chollet2019measure}
+    \end{itemize}
+\end{frame}
+
+
+\section{Inteligencia Artificial en Cifras}
+\begin{frame}{El estado de la IA en 2021 - Reporte \citeauthor{mackenseyAI2021}}
+    \begin{itemize}
+        \item El 56\% de los encuestados confirman la incorporación de IA en al menos una función dentro de su organización, especialmente en:
+            \begin{itemize}
+                \item servicios y operaciones: contact centers
+                \item marketing y ventas: segmentación de mercados
+                \item análisis de riesgos
+                \item desarrollo de productos
+            \end{itemize}
+        \item 64\% de las compañías con mayor rendimiento en IA utiliza sistemas híbridos o la nube para la gestión de IA
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{La Inteligencia Artificial en Medicina - Reporte \citeauthor{mackinseyHealthcareAI2021}}
+    \begin{itemize}
+        \item Enfrentar la creciente demanda de servicios
+        \item Se estima que para el 2050, uno de cada cuatro ciudadanos de Europa y América del Norte tendrá una edad superior a 65 años \parencite{mackinseyHealthcareAI2021} en  \citetitle{mackinseyHealthcareAI2021}
+        \item La construcción de sistemas de IA en la salud puede afectar positivamente mejorando la productividad y la eficiencia del cuidado.
+        % \item Entre las principales áreas de la salud en las que la IA tiene potencial para mejorar están: la prevención, el diagnóstico, el tratamiento, la gestión de enfermedades crónicas y la administración
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{La Inteligencia Artificial en Medicina - Reporte \citeauthor{mackinseyHealthcareAI2021}}
+    \centering
+    \includegraphics[width=\textwidth]{images2/SVG-AI-in-healthcare-ex1.png}
+\end{frame}
+
+\begin{frame}{La Inteligencia Artificial en Medicina - Desafíos}
+    \begin{itemize}
+    \item Nivel de digitalización de apenas un 35\%
+    \item Requiere de trabajo interdisciplinario
+    \item Gestión de calidad en estudios de casos y evaluación del desempeño de algoritmos
+    \item Incluir a los médicos en las fases de diseño
+    \item Construcción de evidencia clínica de la calidad y efectividad de la solución de IA
+    \item Replantear la Educación
+    
+    % \item Se requiere de acceso a datos con calidad y disponibilidad. De acuerdo a \textcite{mackinseyHealthcareAI2021}, la Salud en Europa es de los sectores con menos digitalización. La disponibilidad de los datos debe también considerar y salvaguardar el anonimato del paciente y por tanto se requiere de una infraestructura interconectada de datos.
+    
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{La Inteligencia Artificial en Medicina - Desafíos Éticos}
+    \begin{itemize}
+    \item Desarrollar agencias regionales o nacionales para la estrategia de IA en salud
+    \item Definir estándares para la digitalización, calidad, completitud, acceso, gobernanza, gestión de riesgos, seguridad y compartición de los datos
+    \item Crear entornos adecuados para el desarrollo y adopción de las soluciones de IA en salud considerando los problemas de regulación y financiamiento    
+\end{itemize}
+
+\end{frame}
+
+
+\section{Machine Learning en Medicina}
+% {
+% \usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{Images/convnet-lenet.png}}%
+\begin{frame}{Principales Técnicas}
+    \centering
+    \includegraphics[height=.5\textheight, width=.8\textwidth]{Images/convnet-lenet.png}
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Support Vector Machine
+                \item K Means
+                \item Árboles de Decisión
+                \item Random Forest
+                % \item KNN
+                % \item Naïve Bayes
+                % \item Deep Learning
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                % \item Support Vector Machine
+                % \item K Means
+                % \item Árboles de Decisión
+                % \item Random Forest
+                \item KNN
+                \item Naïve Bayes
+                \item Deep Learning
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    
+\end{frame}
+% }
+\begin{frame}{Principales Áreas}
+    \begin{itemize}
+        \item Visión Artificial $\rightarrow$ Computer Vision
+        \item Procesamiento Natural de Lenguaje
+        \item Shallow Learning (i.e. datos con características predefinidas)
+    \end{itemize}
+\end{frame}
+\subsection{Computer Vision}
+\begin{frame}{Visión Artificial}
+    \centering
+    \includegraphics[height=.5\textheight, width=.8\textwidth]{Images/deeplearning.jpg}
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Clasificación de Imágenes
+                \item Detección de Objetos
+                \item Segmentación de Imágenes
+                % \item Denoising (AutoEncoders)
+                % \item Generación Sintética de Datos (GAN)
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Denoising (AutoEncoders)
+                \item Generación Sintética de Datos (GAN)
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    
+\end{frame}
+
+\begin{frame}{Aplicaciones de Computer Vision en Medicina I}
+    \centering
+    \includegraphics[width=.9\textwidth, height=.7\textheight]{images2/SurveyDeepLearningMedicalImages.jpg}
+    \parencite{litjens2017survey}
+\end{frame}
+
+\begin{frame}{Aplicaciones de Computer Vision en Medicina II}
+    \centering
+    \includegraphics[width=.9\textwidth, height=.7\textheight]{images2/ResumenEnfermedadesEstudiadasML.png}
+    % \parencite{litjens2017survey}
+\end{frame}
+
+\begin{frame}{Clasificación radiológica en imágenes médicas}
+    \begin{figure}
+        \begin{subfigure}[t]{.4\textwidth}
+        \centering
+        \includegraphics[width=.5\linewidth]{mammogram.jpg}
+        \caption{Rayos X - Mamografía - Tomosíntesis}
+        \end{subfigure}
+    \hfill
+        \begin{subfigure}[t]{.4\textwidth}
+        \centering
+        \includegraphics[width=.6\linewidth]{Images/mri-example.jpg}
+        \caption{Resonancia Magnética}
+        \end{subfigure}
+        
+    \medskip
+    
+        \begin{subfigure}[t]{.4\textwidth}
+        \centering
+        \includegraphics[width=.6\linewidth]{Images/ultrasound-example.jpg}
+        \caption{Ultrasonido}
+        \end{subfigure}
+    \hfill
+        \begin{subfigure}[t]{.4\textwidth}
+        \centering
+        \includegraphics[width=.6\linewidth]{images2/OIP.jpg}
+        \caption{Tomografía CT}
+        \end{subfigure}
+    
+    % \caption{A 2x2 matrix of images}
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}{Sistema de detección y diagnóstico asistidos por computador}
+    \centering
+    Los avances en la tecnología de imágenes como en las ciencias de la computación han contribuido a una mejora de la interpretación de la imagen médica \parencite{stoitsis2006computer}.
+\end{frame}
+
+\begin{frame}{Sistemas CAD}
+    \begin{block}{Definición}
+        Un sistema CAD utiliza técnicas de visión computacional e inteligencia artificial y \textit{machine learning} para extraer información útil de una imagen digital.
+    \end{block}
+    
+    \centering
+    \href{https://dl.acm.org/ccs}{https://dl.acm.org/ccs}
+    
+\end{frame}
+% \subsection{CAD clásico}
+\begin{frame}{Etapas CAD Clásico}
+    \smartdiagramset{
+    uniform color list=white for 1 items,
+    uniform arrow color=true,
+    back arrow disabled=true,
+    additions={
+    additional item offset=0.85cm,
+    additional item border color=red,
+    additional connections disabled=false,
+    additional arrow color=red,
+    additional arrow tip=stealth,
+    additional arrow line width=1pt,
+    additional arrow style=]-,
+    }
+    }
+    \resizebox{\textwidth}{!}{
+    \smartdiagramadd[flow diagram:horizontal]{\includegraphics[width=\textwidth]{images2/mammo1.png}, Pre-processing,
+      Segmentation, Feature Extraction, Classification, Performance}{
+      below of module5/{benign, malignant}}    
+      }
+
+\end{frame}
+% \subsection{CAD basado en Machine Learning}
+\begin{frame}{Etapas CAD Machine Learning}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{Images/CAD-ML.png}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{Transfer Learning}
+    \includegraphics[width=\textwidth]{ImagesPresentation/TransferLearning.png}
+\end{frame}
+
+
+\begin{frame}{Transfer Learning}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{Images/transferLearningbaw-eng-init.png}
+        % \caption{Caption}
+        % \label{fig:my_label}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Transfer Learning }
+    \begin{block}{Definición}
+    Transfer Learning $\mathbb{T_{L}}$ es el proceso que mejora el aprendizaje de una función objetivo $\mathcal{Y}^{T} = \ypredtarget(\mathcal{I}^{T})$ en un dominio objetivo $\mathcal{D}^{T}$ wrt. a una tarea de aprendizaje objetivo $\mathcal{T}^{T}$ re-utilizando una ConvNet pre-entrenada $\mathcal{Y}^{S} = \ypredsource(\mathcal{I}^{S})$ de $L$ en un dataset del dominio fuente $\mathcal{D}^{S}$ y de la tarea de aprendizaje fuente $\mathcal{T}^{S}$ como se muestra en (\ref{Eq:Transfer2}); donde $\mathcal{A}$ representa el proceso de transferencia de conocimiento sobre la ConvNet fuente.
+    \end{block}
+    \begin{equation}
+    % \mathbb{T_{L}} \left< \ypredsource(I) \right> = \mathcal{A}\left (\ypredsource(I) \Bigr\rvert_{0}^{L} \right)
+    \mathbb{T_{L}} \left< \ypredsource(\mathcal{I}^{S}), \mathcal{I}^{T}  \right> = \ConvNetOut \left(\ypredsource(\mathcal{I}^{T}) \Bigr\rvert_{0}^{L} \right)
+    \label{Eq:Transfer2}
+\end{equation}
+\end{frame}
+
+
+
+\subsection{Procesamiento de Lenguaje Natural}
+\begin{frame}{Procesamiento de Lenguaje Natural}
+    AI written, AI Read
+    \centering
+    \includegraphics[width=.8\textwidth]{images2/funStoryAI.png}
+\end{frame}
+
+\begin{frame}{Med-PaLM2}
+    \begin{itemize}
+        \item Med-PaLM 2 es la mejora presentada por Google de Med-PaLM
+        \item Se basa en PaLM2 como LLM y la estrategia denominada \emph{ensemble refinement} para mejorar las capacidades de razonamiento
+        \item Obtuvo 86.5\% en el dataset \emph{MedQA}. Actual estado del Arte
+        \item Sobre pasa la marca mínima de 60\% que se aplica para evaluar a los expertos médicos en EEUU
+    \end{itemize}
+\end{frame}
+
+
+\section{Aplicaciones Prácticas}
+\subsection{Cáncer de Mama}
+\begin{frame}{Machine Learning en Cáncer de Mama - Ejemplo}
+
+    \textbf{Cáncer de Mama}
+    
+    \begin{itemize}
+        \item<1-> {
+        Tumor maligno originado en las células de la mama.
+        % \pause
+        }
+        \item<2-> {
+        Crecimiento descontrolado de células que pueden invadir tejidos circundantes o extenderse a otras regiones del cuerpo (metástasis).
+        % \pause
+        }
+        % \item<3-> {
+        %  En 2018 se registró un total de 2,088,849 casos y  626,679  muertes(GLOBOCAN)\cite{GLOBOCAN} 
+        % % \pause
+        \item<3-> {
+         Machine learning puede ayudar a mejorar la detección temprana del cáncer de seno mediante el análisis de las mamografías y la identificación de lesiones sospechosas 
+        % \pause
+        }
+        
+        % \item<4-> {
+        % Si el tumor se detecta a tiempo, el paciente tiene una probabilidad del 85\% de cura; Una detección tardía reduce, la probabilidad al 10\% \cite{Charan2018}.
+        % % \pause
+        % }
+        
+        % \item<5-> {
+        % El cáncer de mama afecta principalmente al género femenino a nivel mundial.
+        % % \pause
+        % }
+        % % \item<4-> {
+        % Mammography is considered the gold standard for screening examination\cite{THOMASSINNAGGARA2014759, Zhang2017, Jalalian2017}.
+        % % \pause
+        % }
+        
+        % \item<5-> {
+        % 10\% of all woman screened for cancer are called back for additional testing and just as little as 0.5\% of them are diagnosed with breast cancer \cite{Zhang2017}
+        % }
+    \end{itemize}
+    
+    % \begin{figure}
+    %     \centering
+    %     \includegraphics[height=0.3\textheight]{ImagesPresentation/breast_cancer.png}
+    %     \caption{Globocan Top Cancer per Country in 2018}
+    %     % \label{fig:my_label}
+    % \end{figure}    
+    
+
+\end{frame}
+
+\begin{frame}{Formulación del Problema de Machine Learning en Imágenes Médicas de Mamografía}
+    \begin{block}{Formulación}
+    Dada una imagen $\mathcal{I} \in \mathbb{R}^{w \times h \times d}$, se desea aprender una función $\ypred(\cdot)$ que mapea un espacio de entrada $\mathcal{X}$, formado por el conjunto de imágenes de entrenamiento, con el espacio de salida $\mathcal{Y}$ formado por las etiquetas o clases; donde: $ \mathcal{I} \in \mathbf{\mathcal{X}}$,  $\mathcal{Y} \in \mathbb{R}$ y $\mathcal{Y} = \{benigno, maligno\}$. 
+    \end{block}
+    \begin{equation}
+        \ypred: \mathbf{\mathcal{X}} \rightarrow \mathcal{Y}    
+    \end{equation}
+
+    \begin{equation}
+        \mathcal{Y} = \ypred(\mathcal{I})
+    \end{equation}
+    \scriptsize
+    \url{https://www.kaggle.com/leningfalconi/miasbreastcancer-classification}
+\end{frame}
+\subsection{Preeclampsia}
+\begin{frame}{Machine Learning en Preclampsia - Ejemplo}
+    
+    \textbf{Preeclampsia}
+    
+    \begin{itemize}
+        \item Complicación del embarazo caracterizada por una presión arterial alta y una afectación renal o hepática. 
+        \item Principal causa de mortalidad de las mujeres durante el embarazo y la causa de la mayor morbi-mortalidad fetal
+        \item Se caracterizado por una función placentaria deficiente y disfunción endotelial materna
+        \item Puede derivar en Eclampsia $\rightarrow$ convulsiones maternas o síndrome HELLP (hemólisis materna, enzimas hepáticas elevadas y recuento bajo de plaquetas)
+        \item A nivel mundial, se estima que la PE afecta del 2\% al 8\% de los embarazos y es responsable de $\ge$ 70 000 muertes maternas y $\ge$ 500 000 muertes fetales cada año 
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Formulación del Problema de Machine Learning en Dataset de Preeclampsia}
+    \begin{block}{Formulación}
+    Dada un vector característico $\mathbf{x} \in \mathbb{R}^{m}$, se desea aprender una función $\ypred(\cdot)$ que mapea un espacio de entrada $\mathcal{X}$, formado por el conjunto de datos de preeclampsia conformado por $m$ valores de distintas proteínas, con el espacio de salida $\mathcal{Y}$ formado por las etiquetas o clases; donde: $ \mathbf{x} \in \mathbf{\mathcal{X}}$,  $\mathcal{Y} \in \mathbb{R}$ y $\mathcal{Y} = \{Preeclampsia, Normal\}$. 
+    \end{block}
+    \begin{equation}
+        \ypred: \mathbf{\mathcal{X}} \rightarrow \mathcal{Y}    
+    \end{equation}
+
+    \begin{equation}
+        \mathcal{Y} = \ypred(\mathbf{x})
+    \end{equation}
+    \scriptsize
+    \url{https://www.kaggle.com/code/leningfalconi/preeclampsia}
+\end{frame}
+
+% \subsection{Cáncer de Mama}
+% {
+%     \setbeamertemplate{navigation symbols}{}
+%     %width=\paperwidth
+%     \usebackgroundtemplate{\includegraphics[width=\paperwidth]{ImagesPresentation/breast_cancer.png}}
+%     \begin{frame}{Example With background image}
+    
+%     hello world!    
+%     \end{frame}
+
+% }
+
+
+
+
+% \begin{frame}{Cáncer de Mama}
+%     \begin{columns}[T] % align columns
+%         \begin{column}{.48\textwidth}
+%         % \color{red}\rule{\linewidth}{4pt}
+%             \begin{itemize}
+%                 \item<1->{La detección temprana del cáncer de mama es crucial para la supervicencia del paciente y su calidad de vida}
+%                 \item<2->{Los exámenes de detección utilizados son: mamografía, ultrasonido, resonancia magnética (MRI), tomosíntesis, termografía y muestra de tejido}
+%                 % \item<2->{ 10\% of all woman screened for cancer are called back for additional testing \cite{Zhang2017}} 
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 % \item<4->{Transfer learning is a deep learning technique that can aid the development of accurate enough classifiers}
+%                 % \item<1->{Detection is done manually and it is related, to radiologist’s experience}
+%                 % \item<2->{ 10\% of all woman screened for cancer are called back for additional testing \cite{Zhang2017}} 
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 % \item<4->{Transfer learning is a deep learning technique that can aid the development of accurate enough classifiers}
+%             \end{itemize}
+        
+%         \end{column}%
+%         \hfill%
+%         \begin{column}{.48\textwidth}
+%         % \color{blue}\rule{\linewidth}{4pt}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[scale=0.25]{ImagesPresentation/mortality-female.png}
+%             \caption{Globocan 2018}
+%             % \label{fig:my_label}
+%         \end{figure}
+%         \end{column}%
+%     \end{columns}
+% \end{frame}
+
+% EXAMENES DE CANCER DE MAMA
+% \subsubsection{Exámenes de detección en cáncer de mama}
+% \begin{frame}{Mamografía}
+%     \begin{columns}[T] % align columns
+%         \begin{column}{.48\textwidth}
+%         % \color{red}\rule{\linewidth}{4pt}
+%             \begin{itemize}
+%                 \item<1->{Es considerado el principal examen (o \textit{gold standard}) para la detección.}
+%                 \item<2->{Genera 4 imágenes en 2 vistas distintas: craneocaudal(cc) y mediolateral oblicua (mlo)} 
+%                         \begin{figure}
+%                             \begin{minipage}[b]{0.45\linewidth}
+%                             \centering
+%                             \includegraphics[height=0.29\textheight]{Images/mlo.png}
+%                             \caption{MLO}
+%                             \end{minipage}
+%                             % \hspace{0.2cm}
+%                             \begin{minipage}[b]{0.45\linewidth}
+%                             \centering
+%                             \includegraphics[height=0.29\textheight]{Images/craniocaudal.png}
+%                             \caption{CC}
+%                             \end{minipage}
+%                         \end{figure}
+%                 % \item<3->{Exposición a dos radiaciones en cada mama.}
+                
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 % \item<4->{Transfer learning is a deep learning technique that can aid the development of accurate enough classifiers}
+%                 % \item<1->{Detection is done manually and it is related, to radiologist’s experience}
+%                 % \item<2->{ 10\% of all woman screened for cancer are called back for additional testing \cite{Zhang2017}} 
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 % \item<4->{Transfer learning is a deep learning technique that can aid the development of accurate enough classifiers}
+%             \end{itemize}
+        
+%         % placing mammogram examples images
+%         % \begin{center}
+%         %     \includegraphics[height=0.30\textheight]{Images/mlo.png} %height=0.32\textheight
+%         %     % \hfill
+%         %     \includegraphics[height=0.30\textheight]{Images/craniocaudal.png}
+%         % \end{center}
+%         \end{column}%
+%         \hfill%
+%         \begin{column}{.48\textwidth}
+%         % \color{blue}\rule{\linewidth}{4pt}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.9\textwidth]{Images/mamografia_examen.jpg}
+%             \caption{Examen de Mamografía}
+%             % \label{fig:my_label}
+%         \end{figure}
+%         \end{column}%
+%     \end{columns}
+% \end{frame}
+
+% \begin{frame}{Ultrasonido}
+%     % Referencia: https://www.breastcancer.org/symptoms/testing/types/ultrasound
+%     \begin{columns}[T] % align columns
+%         \begin{column}{.48\textwidth}
+%         % \color{red}\rule{\linewidth}{4pt}
+%             \begin{itemize}
+%                 \item<1->{Recomendado para pacientes jóvenes ($edad<30$) o con implantes.}
+%                 \item<2->{Exposición nula a radiación.} 
+%                 \item<3->{Se utiliza como un examen complementario a otras pruebas.}
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 \item<4->{Utilizado para guiar agujas de biopsia}
+%                 % \item<1->{Detection is done manually and it is related, to radiologist’s experience}
+%                 % \item<2->{ 10\% of all woman screened for cancer are called back for additional testing \cite{Zhang2017}} 
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 % \item<4->{Transfer learning is a deep learning technique that can aid the development of accurate enough classifiers}
+%             \end{itemize}
+        
+%         % placing mammogram examples images
+%         % \begin{center}
+%         %     \includegraphics[height=0.30\textheight]{Images/mlo.png} %height=0.32\textheight
+%         %     % \hfill
+%         %     \includegraphics[height=0.30\textheight]{Images/craniocaudal.png}
+%         % \end{center}
+        
+%         \centering
+%         \includegraphics[height=0.29\textheight]{Images/ultrasound-example.jpg}
+        
+            
+        
+%         \end{column}%
+%         \hfill%
+%         \begin{column}{.48\textwidth}
+%         % \color{blue}\rule{\linewidth}{4pt}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.9\textwidth]{Images/ultrasound-exam.jpg}
+%             \caption{Examen de Ultrasonido}
+%             % \label{fig:my_label}
+%         \end{figure}
+%         \end{column}%
+%     \end{columns}
+% \end{frame}
+
+
+% \begin{frame}{Resonancia Magnética MRI}
+%     % Referencia: https://www.breastcancer.org/symptoms/testing/types/ultrasound
+%     \begin{columns}[T] % align columns
+%         \begin{column}{.48\textwidth}
+%         % \color{red}\rule{\linewidth}{4pt}
+%             \begin{itemize}
+%                 \item<1->{Restrictivo en costo.}
+%                 \item<2->{Exposición a radiación.} 
+%                 \item<3->{Utilizado en pacientes con diagnóstico (a veces).}
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 \item<4->{Determina la extensión (o tamaño) del cáncer.}
+%                 \item<5->{Se utiliza en conjunto con otras pruebas. Puede no detectar tumores que sí son encontrados por mamografía}
+%                 % \item<2->{ 10\% of all woman screened for cancer are called back for additional testing \cite{Zhang2017}} 
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 % \item<4->{Transfer learning is a deep learning technique that can aid the development of accurate enough classifiers}
+%             \end{itemize}
+        
+%         % placing mammogram examples images
+%         % \begin{center}
+%         %     \includegraphics[height=0.30\textheight]{Images/mlo.png} %height=0.32\textheight
+%         %     % \hfill
+%         %     \includegraphics[height=0.30\textheight]{Images/craniocaudal.png}
+%         % \end{center}
+        
+%         \centering
+%         \includegraphics[height=0.29\textheight]{Images/mri-example.jpg}
+        
+            
+        
+%         \end{column}%
+%         \hfill%
+%         \begin{column}{.48\textwidth}
+%         % \color{blue}\rule{\linewidth}{4pt}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.9\textwidth]{Images/mri-exam.jpg}
+%             \caption{MRI}
+%             % \label{fig:my_label}
+%         \end{figure}
+%         \end{column}%
+%     \end{columns}
+% \end{frame}
+
+% \begin{frame}{Tomosíntesis}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[height=0.5\textheight]{Images/tomosintesis-exam.jpg}
+%         % \caption{Caption}
+%         % \label{fig:my_label}
+%     \end{figure}
+%     \begin{itemize}
+%         \item<1->{También conocida como mamografía tridimensional.}
+%         \item<2->{Obtiene imágenes tomográficas: se toman imágenes desde diferentes proyecciones.} 
+%         \item<3->{Utiliza dosis bajas de radiación.}
+%         % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%         \item<4->{Minimiza la superposición de tejidos que puede ocultar la presencia de cáncer.}
+%         % \item<5->{Se lo utiliza en conjunto con otras pruebas. Puede no detectar tumores que sí son encontrados por mamografía}
+%         % \item<2->{ 10\% of all woman screened for cancer are called back for additional testing \cite{Zhang2017}} 
+%         % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%         % \item<4->{Transfer learning is a deep learning technique that can aid the development of accurate enough classifiers}
+%     \end{itemize}
+
+    
+    
+% \end{frame}
+
+% \begin{frame}{Termografía}
+%     \begin{columns}[T] % align columns
+%         \begin{column}{.48\textwidth}
+%         % \color{red}\rule{\linewidth}{4pt}
+%             \begin{itemize}
+%                 \item<1->{Esta tecnología registra gráficamente la temperatura del cuerpo.}
+%                 \item<2->{Los tumores de seno tienen una generación de calor metabólica más alta.} %porque las células se reproducen más rápido que en tejido normal, esas variaciones pueden ser vistas a través de la termografía infrarroja. 
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 % \item<3->{Es un método no invasivo, utilizable por mujeres de cualquier edad y embarazadas.}
+%                 \item<3->{50 veces más barato que Mamografía}
+%                 \item<4->{Detección a pocos minutos de aparición.} 
+%                 % \item<3->{It is important to design CAD systems to aid radiologist in detection}
+%                 % \item<4->{Transfer learning is a deep learning technique that can aid the development of accurate enough classifiers}
+%             \end{itemize}
+        
+%         \end{column}%
+%         \hfill%
+%         \begin{column}{.48\textwidth}
+%         % \color{blue}\rule{\linewidth}{4pt}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.9\textwidth]{Images/termography.jpg}
+%             % \caption{MRI}
+%             % \label{fig:my_label}
+%         \end{figure}
+%         \centering
+%         \say{\footnotesize{\textit{La Administración de Alimentos y Medicamentos de los Estados Unidos (FDA, por sus siglas en inglés) le recuerda que la mamografía ... sigue siendo la prueba de detección del cáncer de seno más eficaz}}}\cite{fda_termo}.
+%         \end{column}%
+%     \end{columns}
+% \end{frame}
+
+% \begin{frame}{Termografía}
+%     \begin{columns}[T] % align columns
+%         \begin{column}{.48\textwidth}
+%         % \color{red}\rule{\linewidth}{4pt}
+%             \begin{itemize}
+%                 \item<1->{La IR no utiliza radiación ionizante.}
+%                 \item<2->{Es un método no invasivo, utilizable por mujeres de cualquier edad y embarazadas.}
+%                 \item<3->{Problema: ausencia de sistemas CAD para ayudar en el diagnóstico}
+%             \end{itemize}
+        
+%         \end{column}%
+%         \hfill%
+%         \begin{column}{.48\textwidth}
+%         % \color{blue}\rule{\linewidth}{4pt}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.9\textwidth]{Images/termograph2.png}
+%             % \caption{MRI}
+%             % \label{fig:my_label}
+%         \end{figure}
+%         \centering
+%         \footnotesize{\textit{El ojo humano puede observar que esta es una mama normal (simetría).\\ ¿Cómo hacer que el computador haga lo mismo?}}
+%         \end{column}%
+%     \end{columns}
+% \end{frame}
+
+% \begin{frame}{Termografía}
+%     \begin{columns}[T] % align columns
+%         \begin{column}{.48\textwidth}
+%         % \color{red}\rule{\linewidth}{4pt}
+%             \begin{itemize}
+%                 \item{La IR no utiliza radiación ionizante.}
+%                 \item{Es un método no invasivo, utilizable por mujeres de cualquier edad y embarazadas.}
+%                 \item{Problema: ausencia de sistemas CAD para ayudar en el diagnóstico}
+%             \end{itemize}
+        
+%         \end{column}%
+%         \hfill%
+%         \begin{column}{.48\textwidth}
+%         % \color{blue}\rule{\linewidth}{4pt}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.9\textwidth]{Images/termo3.png}
+%             % \caption{MRI}
+%             % \label{fig:my_label}
+%         \end{figure}
+%         \centering
+%         \footnotesize{\textit{El ojo humano puede observar que esta es una mama presenta problemas.\\ ¿Cómo hacer que el computador haga lo mismo?}}
+%         \end{column}%
+%     \end{columns}
+% \end{frame}
+% \begin{frame}{Machine Learning and breast mammogram abnormalities classification}
+%     \begin{itemize}
+%         \item Deep learning models have achieved top accuracy scores in computer visual tasks\cite{guo2016deep}.
+%         \item However, mammogram datasets are not \emph{deep enough}.
+%         \item Transfer Learning helps to improve a target learner by using a pre-trained high performance learner (i.e. we can use less data).
+        
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Introduction}{Computer Aided Diagnostic CADx and Detection CADe Benefits}
+
+%     \begin{itemize}
+%         \item<1-> Assist radiologist in diagnostic.
+%         \item<2-> Automate detection of abnormalities.
+%         \item<3-> Results are independent of radiologist's experience.
+%         \item<4-> Can be used to train new physicians.
+%         \item<5-> Reduce the need for additional testing\cite{Al-Masni2017}.
+%     \end{itemize}
+
+
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{mammogram.jpg}
+
+% \end{frame}
+
+
+% \begin{frame}{Introduction}{Computer Aided Diagnostic CADx and Detection CADe Challenges}
+
+% \begin{itemize}
+%     \item<1-> Image processing because of breast density.
+%     \item<2-> Detection of abnormalities in mammogram image.
+%     \item<3-> Classification of abnormalities in mammogram image.
+    
+% \end{itemize}
+    
+% \end{frame}
+
+% \section{Research Goals}
+% % \subsection{Principal Goal}
+% \begin{frame}{Research Goal}
+% \begin{columns}
+%     \begin{column}{.5\textwidth}
+    
+%     Develop a machine learning classification model for breast lesions in mammograms based on transfer learning and ensemble learning.
+    
+%     \end{column}
+    
+%     \begin{column}{.5\textwidth}
+%     \centering
+%     \begin{figure}
+%         \centering
+%         \includegraphics[height=0.45\textheight]{Images/deeplearning.jpg}
+%         \caption{Detecting and classifying lesions in mammograms with Deep Learning \cite{Ribli2018}}
+%         \label{fig: DeepLearningWorking}
+%     \end{figure}
+    
+%     \end{column}
+    
+    
+%     \end{columns}
+
+
+    
+% \end{frame}
+% \subsection{Specific Goals}
+% \begin{frame}{Specific Goals}
+%     \begin{itemize}
+%         \item Conduct Literature Review
+%         \item Evaluate and Experiment with CNN, Transfer Learning and Ensemble learning
+%         \item Provide a Compararive Study of classification techniques
+%         \item Build our Model
+%         \item Evaluate Model's Performance
+%     \end{itemize}
+% \end{frame}
+
+% \section{Sistemas CAD}
+% \subsection{Definición}
+
+
+
+% \section{Enfoque Propuesto}
+% \subsection{Problema de Investigación}
+% \begin{frame}{Formulación del Problema}
+    % \begin{block}{Problema}
+    % Determinar el tipo de anormalidad de una imagen de área de interés (ROI) de mamografía
+    % \end{block}
+
+% \end{frame}
+
+
+% \subsection{Redes Neuronales Convolucionales}
+% \begin{frame}{Estructura de una ConvNet}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{Images/convnet-lenet.png}
+%         % \caption{Caption}
+%         % \label{fig:my_label}
+%     \end{figure}
+    
+%     \begin{equation}
+%         (I*K)(i,j)=\sum_{w}\sum_{h}I(w,h)K(i-w,j-h)
+%     \end{equation}
+% \end{frame}
+
+% \begin{frame}{Convolución en 2 Dimensiones}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.6\textwidth]{Images/convolution_operation.png}
+%         % \caption{Caption}
+%         % \label{fig:my_label}
+%     \end{figure}
+%     \centering
+%     \href{http://cs231n.github.io/convolutional-networks/}{http://cs231n.github.io/convolutional-networks/}
+% \end{frame}
+
+% \begin{frame}{ConvNets Ventajas y Desventajas}
+%     \textbf{Ventajas:}
+%     \begin{itemize}
+%         \item Reducción de parámetros por pesos compartidos.
+%         \item Conexiones locales.
+%         \item Invariante a la ubicación del objeto.
+%         \item Es un modelo de extracción de características automático
+%     \end{itemize}
+%     \textbf{Desventajas:}
+%     \begin{itemize}
+%         \item Requiere grandes cantidades de datos etiquetados
+%         \item Susceptibilidad a overfitting
+%         \item Modelo hiperparametrizado
+%         \item Requiere procesamiento computacional alto (GPU, TPU)
+%         \item El entrenamiento de la red puede tomar: dias, semanas o meses.
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Cómo prevenir el Overfitting?}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[height=\textheight]{Images/homer-thinking.png}
+%         % \caption{Caption}
+%         % \label{fig:my_label}
+%     \end{figure}
+% \end{frame}
+% \subsection{Transfer Learning Model}
+% \begin{frame}{Transfer Learning Definición clásica}
+%     \begin{block}{Definición}
+%     Dada una red neuronal convolucional pre-entrenada en un Dominio Fuente $D^{S}$ de imágenes naturales, con una tarea de entrenamiento 
+%     Dado un dominio fuente $\mathcal{D}^{S}$ y una tarea de aprendizaje $\mathcal{T}^{S}$, un dominio objetivo $\mathcal{D}^{T}$ y una tarea de aprendizaje objetivo $\mathcal{T}^{T}$, el objetivo de transfer learning es mejorar el aprendizaje de la función objetivo $\ypredtarget(\cdot)$ sobre $\mathcal{D}^{T}$ usando el conocimiento de $\mathcal{D}^{S}$ y $\mathcal{T}^{S}$; donde $\mathcal{D}^{S} \neq \mathcal{D}^{T}$ o $\mathcal{T}^{S} \neq \mathcal{T}^{T}$.
+%     \end{block}
+% \end{frame}
+
+
+% \section{Metodología}
+% \subsection{Dataset}
+% \begin{frame}{Dataset}
+%     Roi images from \emph{The Curated Breast Imaging Subset of DDSM(CBIS-DDSM)} \cite{Lee2017}.
+%     \begin{itemize}
+%     \item Training:
+%         \begin{itemize}
+%             \item Benign: 681
+%             \item Malignant: 637
+%         \end{itemize}
+%     \item Testing:
+%     \begin{itemize}
+%             \item Benign: 231
+%             \item Malignant: 147
+%         \end{itemize}
+% \end{itemize}
+% \end{frame}
+
+
+% \begin{frame}{Metodología}
+%     \centering
+%     \includegraphics[height=0.7\textheight]{Images/methodology.png}
+% \end{frame}
+
+% \subsection{Preprocesamiento de Imagen}
+% \begin{frame}{Preprocesamiento de imagen de mamografía}
+        
+%     \begin{itemize}
+%         \item Convertir de Dicom a format PNG 
+%         \item Extraer la zona de interés
+%         % \item Merge Training and Testing cases
+%         \item Normalización del valor del pixel $[0, 255]$
+%         \item Ecualización de Histograma
+%         \item Redimensionamiento de la imagen a $ 320\times 320$ considerando \emph{aspect ratio} $r$, definido como:
+%         \begin{equation}
+%             r=width/height\label{eq aspect_ratio}
+%         \end{equation}
+%         \begin{itemize}
+%             \item Upsampling: cubic interpolation
+%             \item Downsampling: area interpolation
+%         \end{itemize}
+%         \item Las imagenes a ser utilizadas deben cumplir con: 
+%             \begin{equation}
+%                 0.4 \leq r \leq 1.5
+%             \end{equation}
+%         \end{itemize}
+
+        
+% \end{frame}
+
+% \begin{frame}{Aspect Ratio}
+%     \begin{columns}[T]
+%         \begin{column}{0.25\textwidth}
+%             \centering
+%             \includegraphics[height=0.5\textheight]{ImagesPresentation/234.png}
+%         \end{column}
+%         % \hfill
+%         \begin{column}{0.25\textwidth}
+%             \centering
+%             \includegraphics[height=0.5\textheight]{ImagesPresentation/231.png}
+%         \end{column}
+%         % \hfill
+%         \begin{column}{0.25\textwidth}
+%             \centering
+%             \includegraphics[height=0.5\textheight]{ImagesPresentation/585.png}
+%         \end{column}
+%         % \hfill
+%         \begin{column}{0.25\textwidth}
+%             \centering
+%             \includegraphics[height=0.5\textheight]{ImagesPresentation/235.png}
+%         \end{column}
+%     \end{columns}
+%     % \begin{tabular}{c|c|c|c}
+%     %      & \includegraphics[height=\textheight]{ImagesPresentation/231.png}  
+%     %     \includegraphics[height=\textheight]{ImagesPresentation/235.png} & \includegraphics[height=\textheight]{ImagesPresentation/221.png}  
+%     % \end{tabular}
+    
+    
+% \end{frame}
+
+
+
+% \begin{frame}{Image Preprocessing Roi Dataset}
+        
+%     \includegraphics[width=\textwidth]{ImagesPresentation/Equalization.png}
+        
+% \end{frame}
+
+% \begin{frame}{Image Preprocessing Otsu Dataset}
+%     \begin{itemize}
+%         \item Convert Dicom images to JPG format
+%         \item Merge Training and Testing cases
+%         \item Image pixel normalization value $[0, 255]$
+%         \item Histogram Equalization
+%         \item Image Resize to $ 224\times 224$ considering \emph{aspect ratio} $r$, defined as:
+%             \begin{equation}
+%                 r=width/height\label{eq aspect_ratio}
+%             \end{equation}
+%             \begin{itemize}
+%                 \item Upsampling: cubic interpolation
+%                 \item Downsampling: area interpolation
+%             \end{itemize}
+%         \item Images to be used must have an aspect ratio: 
+%         \begin{equation}
+%             0.4 \leq r \leq 1.5
+%         \end{equation}
+%         \item Use of Otsu binarization \cite{otsualgorithm} and morphological operations.
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Image Preprocessing Otsu Dataset}
+%     \includegraphics[width=\textwidth]{ImagesPresentation/Preprocessing.png}
+% \end{frame}
+
+% \begin{frame}{CAD SYSTEM}
+%      \includemedia[
+%   activate=pageopen,
+%   width=320pt,
+%   height=160pt,
+%   passcontext,
+%   addresource=Presen4.mp4,
+%  flashvars={source=Presen4.mp4 &loop=false &scaleMode=letterbox          % variables
+% }
+% ]{\fbox{Click!}}{VPlayer.swf}
+
+% \end{frame}
+
+% \begin{frame}{CAD SYSTEM}
+%     \includegraphics[height=0.45\textheight]{Images/CadSystem.png}
+% \end{frame}
+
+% \section{Literature Review}
+% \begin{frame}{Literature Review}
+%     \begin{block}{Search String}
+%     "breast cancer" AND ("classification" OR "detection" OR "prediction") AND ("ensemble learning" OR "transfer learning" ) AND mammo*
+%     \end{block}
+% \end{frame}
+% \begin{frame}{Literature Review}{Results}
+%      \begin{table}[]
+%         \begin{tabular}{lc}
+%         \textbf{Database} & \multicolumn{1}{l}{\textbf{\begin{tabular}[c]{@{}l@{}}\#Publications: \\ 2014-present\end{tabular}}} \\ \hline
+%         Scopus            & 38                                                                                                   \\ \hline
+%         IEEE              & 11                                                                                                   \\ \hline
+%         Science Direct    & 51                                                                                                   \\ \hline
+%         PubMed            & 10                                                                                                   \\ \hline
+%         ACM               & 25                                                                                                   \\ \hline
+%         Web of Science    & 23                                                                                                   \\ \hline
+%         \textbf{Total}    & \textbf{158}                                                                                         \\ \hline
+%         \end{tabular}
+%     \end{table}
+% \end{frame}
+
+% \begin{frame}{Literature Review}{Inclusion-Exclusion Criteria}
+
+% \textbf{Inclusion:}
+% \begin{itemize}
+%     \item Digital mammography images is used
+%     \item Transfer Learning model or Deep Learning
+%     \item Ensemble learning model
+%     \item SLR, Surveys are integrated
+% \end{itemize}
+
+% \textbf{Exclusion:}
+% \begin{itemize}
+%     \item Tomosynthesis, histological, ultrasound or magnetic resonance images are used
+% \end{itemize}
+
+% \end{frame}
+
+% \begin{frame}{Literature Review}{Papers to review}
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale = 0.7]{Images/state.jpg}
+%     \caption{Literature Review Extraction State}
+%     \label{fig: slr state}
+% \end{figure}
+
+% \begin{itemize}
+%     \item Accepted = 18
+%     \item Duplicated = 14
+%     \item Rejected = 58
+%     \item Unclassified = 83
+% \end{itemize}
+% \end{frame}
+% \begin{frame}{Literature Review}{Extraction}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[scale = 0.7]{Images/NumofPub.jpg}
+%         \caption{"Number of papers published on CADs from 2012 to January 2017 using specified criteria" \cite{Yassin2018}}
+%         \label{fig:number of papers}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}{Literature Review}{Extraction}
+%     \centering
+%     Most commonly used MLT used in CAD of breast Cancer per year\cite{Yassin2018}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[height=0.8\textheight]{Images/publicationsvstechnique.jpg}
+%         %\caption{Most commonly used MLT used in CAD of breast Cancer per year\cite{Yassin2018}}
+%         \label{fig:number of MLT}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}{Literature Review}{Findings}
+%     \begin{itemize}
+%         \item Use of deep learning is recent. From 2016 on, since \cite{Yassin2018} SLR is finished in 2017.
+%         \item According to \cite{pedro2018mass} survey, most classifiers are binary classifications with results above 90\%. However when mammogram is done with more classes, accuracy drops.
+%         \item According to \cite{Yassin2018} there is little research in ensemble learning in breast cancer classification
+%         \item Reinforcement Learning has not yet been proved in breast classification pathologies, probably because its formulation is different from classification tasks
+%         \item There is little way to generalization of models, since most researchers use only one database for experimentation.
+%         \item Probably a benchmark for generalization is requiered.
+%         % \item Comercial products have low performance
+%     \end{itemize}
+    
+% \end{frame}
+
+% \section{Experimento}
+% \subsection{Training Set-Up}
+% \begin{frame}{CNN training Parameters and Metrics}
+%     \begin{itemize}
+%         \item Total number of epochs: 6000
+%         \item batch size: 100
+%         \item learning rate: 0.01
+%         \item Total benign cases: 903
+%         \item Total malignant cases: 772
+%         \item Data Augmentation: no
+%         \item Validation size: 10\%
+%         \item Testing size: 10\%
+%         \item Training size: 80\%
+%         \item Performance Metric: Accuracy, as defined by:
+%             \begin{equation}
+%                 Accuracy = \frac{TP+TN}{P+N} \label{acc}
+%             \end{equation}
+
+%     \end{itemize}
+    
+% \end{frame}
+
+
+
+% \section{Resultados Experimentales}
+
+% \subsection{Avances}
+% \begin{frame}{Vgg16 Fine Tuning}
+%     \begin{figure}
+%             \centering
+%             \includegraphics[width=0.55\textwidth]{Images/vgg16train-acc-2019-9-18-12-35.jpg}
+%             \caption{Train vs Validation}
+%             \label{fig:my_label}
+%     \end{figure}
+
+%     % \begin{columns}[T] % align columns
+%     %     \begin{column}{.48\textwidth}
+%     %     \end{column}%
+%     %     \hfill%
+%     %     \begin{column}{.48\textwidth}
+%     %     \end{column}%
+%     % \end{columns}
+% \end{frame}
+
+% \begin{frame}{Vgg16 Fine Tuning}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.75\textwidth]{Images/vgg16_roc-auc_2019-9-18-12-35.jpg}
+%             \caption{ROC Curve}
+%             % \label{fig:my_label}
+%         \end{figure}
+    
+% \end{frame}
+% \begin{frame}{Dataset}
+% Two datasets were used in the following experiments:
+% \begin{itemize}
+%     \item MIAS dataset \cite{mias}
+%     \item DDSM dataset \cite{ddsm}
+%     \item CBIS-DDSM \cite{CBISDDSM2017}. 
+% \end{itemize}
+
+% \end{frame}
+
+% \begin{frame}{CBIS-DDSM Cropped ROI Images}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[scale=0.25]{Experiment2_Images/images_moving.png}
+%         \caption{CBIS DDSM ROI}
+%         \label{fig: la_data}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}{Experimentation}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[scale=0.7]{i-see-bad-data.jpg}
+%         % \caption{Caption}
+%         \label{fig:my_label}
+%     \end{figure}
+% \end{frame}
+
+% \subsection{Experiment 1}
+% \begin{frame}{Experiment 1}{\large Transfer Learning with GoogleNet}
+%     \begin{itemize}
+%         \item \textbf{Dataset:} DDSM images of 200x400 pixels distributed in 3 categories: \textit{Benign, Malignant, Normal}. Full size mammogram. Dataset is split in 80\% Training and 20\% Validation. 
+%         \item \textbf{Preprocessing:} Image is resized to 224x224 image specifications to use GoogleNet. No data augmentation was used
+%         \item \textbf{Training options:} Minibatch of 10 with Max Epochs of 6. First 40 Layers frozen.
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Experiment 1}{\large Results December 12}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{Experiment1_Images/TrainingProgress.png}
+%         \caption{Training}
+%         \label{fig:my_label}
+%     \end{figure}
+    
+% \end{frame}
+
+% \begin{frame}{Experiment 1}{\large Results December 12}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{Experiment1_Images/confusionMatrix.jpg}
+%         \caption{Confusion Matrix}
+%         \label{fig:my_label}
+%     \end{figure}
+    
+% \end{frame}
+
+% \begin{frame}{Experiment 1}{\large Results December 12 2018}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{Experiment1_Images/mammogramTest.jpg}
+%         \caption{Prediction}
+%         \label{fig:my_label}
+%     \end{figure}
+    
+% \end{frame}
+
+% \begin{frame}{Experiment 1}{\large Conclusions}
+%     \begin{itemize}
+%         \item Batch value is too small
+%         \item Poor classification probably because of resize and no image prepossessing invested in removal of strange objects and in improvement of its characteristics. 
+%     \end{itemize}
+    
+% \end{frame}
+
+% \subsection{Experiment 2}
+% \begin{frame}{Experiment 2}{\large Transfer Learning with GoogleNet }
+%     \begin{itemize}
+%         \item \textbf{Dataset:} CBIS-DDSM images of 400x600 pixels distributed in 3 categories: \textit{Benign, Malignant}. Cropped ROI images. Dataset is split in 80\% Training and 20\% Validation. 
+%         \item \textbf{Preprocessing:} Image is resized to 224x224 image specifications to use GoogleNet. Data augmentation was used: reflection, x, y - translation, scale
+%         \item \textbf{Training options:} First 82 Layers are frozen. Batch of 256 with Max Epochs of 40.
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Experiment 2}{\large Results Feb 2 2019}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{Experiment2_Images/transferlearning_feb1model2.png}
+%         \caption{Training}
+%         \label{fig:my_label}
+%     \end{figure}
+    
+% \end{frame}
+
+% \begin{frame}{Experiment 2}{\large Results Feb 2 2019}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[height=0.72\textheight]{Experiment2_Images/transferlearningprediction_feb1_1model2.png}
+%         \caption{Prediction}
+%         \label{fig:my_label}
+%     \end{figure}
+    
+% \end{frame}
+
+% \begin{frame}{Experiment 2}{\large Conclusions}
+%     \begin{itemize}
+%         \item Use of ROI images improved training results
+%         \item There still exist some images with strange objects in them. A removal of those images is suggested.
+%         \item Data augmentation seems to have helped to achieve a better accuracy. However some models were also trained with rotations and frozen less first layers but they didn' achieve this result.
+%     \end{itemize}
+    
+% \end{frame}
+
+% \subsection{Experiment 3}
+% \begin{frame}{Experiment 3}{\large Simple Transfer Learning with Tensorflow on Inception V3}
+%     \begin{itemize}
+%         \item \textbf{Dataset:} CBIS-DDSM images of 400x600 pixels distributed in 3 categories: \textit{Benign, Malignant}. Cropped ROI images. Only training set is provided. Less pictures were used  
+%         \item \textbf{Preprocessing:} None, data is loaded to script
+%         \item \textbf{Training options:} default options provided by script. Batch of 100, 4000 epochs of training.
+%         \item \textbf{command used:} python retrain.py --image\_dir ./data\_jpg/train/ --output\_graph ./tftl/output\_graph.pb --output\_labels ./tftl/output\_labels.txt --sumaries\_dir ./tftl/retrain\_logs/ --bottleneck\_dir ./tftl/bottleneck/
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Experiment 3}{\large Results Feb 2 2019}
+%     \begin{columns}
+%         \begin{column}{0.3\textwidth}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width = 0.7\textwidth]{Experiment3_Images/clave.png}
+%             \caption{Labels}
+%             \label{fig:my_label}
+%         \end{figure}
+%         \end{column}
+%         \begin{column}{0.7\textwidth}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.7\textwidth]{Experiment3_Images/accuracy.png}
+%             \caption{Accuracy}
+%             \label{fig:my_label}
+%         \end{figure}
+%         \end{column}
+%     \end{columns}
+    
+    
+    
+% \end{frame}
+
+% \begin{frame}{Experiment 3}{\large Results Feb 2 2019}
+%     \begin{columns}
+%         \begin{column}{0.3\textwidth}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width = 0.7\textwidth]{Experiment3_Images/clave.png}
+%             \caption{Labels}
+%             \label{fig:my_label}
+%         \end{figure}
+%         \end{column}
+%         \begin{column}{0.7\textwidth}
+%         \begin{figure}
+%             \centering
+%             \includegraphics[width=0.7\textwidth]{Experiment3_Images/crossentropy.png}
+%             \caption{Cross Entropy}
+%             \label{fig:my_label}
+%         \end{figure}
+%         \end{column}
+%     \end{columns}
+    
+    
+    
+% \end{frame}
+
+% \begin{frame}{Experiment 3 }{\large Conclusions}
+%     \begin{itemize}
+%         \item Best transfer learning result achieved so far
+%         \item Things to try: more steps?
+%         \item Things to understand: what data augmentation was used?
+%         \item Only training set images were used. If the whole dataset were used, would it enhance results?
+%     \end{itemize}
+    
+% \end{frame}
+% \subsection{Experiment 4}
+% \begin{frame}{Experiment 4}{\large Transfer Learning with VGG-16}
+%     \begin{itemize}
+%         \item \textbf{Dataset:} CBIS-DDSM images of 400x600 pixels distributed in 3 categories: \textit{Benign, Malignant}. Cropped ROI images. Dataset is organized in Train and Valid folders as shown in \ref{fig: la_data}. 
+%         \item \textbf{Preprocessing:} Image is resized to 224x224. Data augmentation was used: reflection, x, y - translation, scale
+%         \item \textbf{Training options:} Training only 4 last layers. Batch of 64, Epochs of 50, lr = 0.0001, RMS\_PRO.
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Experiment 4}{\large Results Feb 5 2019}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.9\textwidth]{Experiment4_Images/Result5feb2019.png}
+%         \caption{Result}
+%         \label{fig:my_label}
+%     \end{figure}
+    
+% \end{frame}
+
+% \begin{frame}{Experiment 4}{\large Results Feb 5 2019}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[height=0.72\textheight]{Experiment4_Images/accuracy5feb201.png}
+%         \caption{Accuracy}
+%         \label{fig:my_label}
+%     \end{figure}
+    
+% \end{frame}
+
+% \begin{frame}{Experiment 4}{\large Results Feb 5 2019}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[height=0.72\textheight]{Experiment4_Images/loss5feb2019.png}
+%         \caption{Accuracy}
+%         \label{fig:my_label}
+%     \end{figure}
+    
+% \end{frame}
+
+
+% \begin{frame}{Experiment 4}{\large Conclusions}
+%     \begin{itemize}
+%         \item Underfitting, model should train more layers
+%         \item It seems rotations of 360 degrees are not improving results in data augmentation.
+        
+%     \end{itemize}
+    
+% \end{frame}
+
+
+% \section{Conclusions}
+% \begin{frame}{Conclusions and Future Work}
+% % In this study, we have compared InceptionV3, Resnet50, MobileNet, and NasNet pre-trained models in the task of mammogram abnormalities classification. From our results we conclude that transfer learning from natural images domain to mammogram images domain is possible. However, classifier performance also depends on the image pre-processing applied to the images. In fact, even though image augmentation was not used in the present work, this will be reviewed in a future study, since there is a consensus in the use of data augmentation in general for transfer learning problems, but it is not so certain to say that geometric transformations improve mammogram classifiers. Resnet50 is the model that achieved the best accuracy for CBIS-DDSM dataset in our study. Another interesting finding is that Otsu segmentation did not improve classification results. 
+
+%     \begin{itemize}
+%         \item Transfer learning from natural images domain to mammogram images domain is possible.
+%         \item Classifier performance also depends on the image pre-processing applied to the images.
+%         \item DataAugmentation will be experimented as future work.
+%         \item Resnet50 is the model that achieved the best. accuracy for ROI CBIS-DDSM dataset in our study, followed by MobileNet.
+%         \item Otsu binarization did not improve classification results. This could mean that there is contextual information that helps in classification.
+%         \item For Otsu Dataset, the best accuracy is achieved by NasNet.
+%         \item Resnet50 performs worse in Otsu Dataset.
+%     \end{itemize}
+% \end{frame}
+
+\section{Publicaciones Realizadas}
+
+\definecolor{azuremist}{rgb}{0.94, 1.0, 1.0}
+\definecolor{beige}{rgb}{0.96, 0.96, 0.86}
+\definecolor{blanchedalmond}{rgb}{1.0, 0.92, 0.8}
+\definecolor{cream}{rgb}{1.0, 0.99, 0.82}
+\definecolor{floralwhite}{rgb}{1.0, 0.98, 0.94}
+
+\begin{frame}{Publicaciones}
+
+    \centering
+    \scriptsize{
+    \begin{tabularx}{0.8\textwidth} { 
+       >{\centering\arraybackslash\hsize=.6\hsize}X 
+       >{\centering\arraybackslash\hsize=1.2\hsize}X 
+       >{\centering\arraybackslash\hsize=0.8\hsize}X}
+     \rowcolor{black}
+     \textbf{\textcolor{white}{Year}} & \textbf{\textcolor{white}{Title}} & \textbf{\textcolor{white}{Publicated at}} \\
+     \rowcolor{beige}
+     2019  & \citetitle{LGFalconi2019}  & 26th International Conference on Systems, Signals and Image Processing  \\
+     \rowcolor{black}
+     \textcolor{white}{2020} & \textcolor{white}{\citetitle{Falconi2020}} & \textcolor{white}{Advances in Science, Technology and Engineering Systems Journal} \\
+     \rowcolor{beige}
+     2020 & "Transfer Learning and Fine Tuning in Mammogram BI-RADS Classification" & IEEE 33rd International Symposium on
+Computer Based Medical Systems (CBMS)\footnote{Accepted}\\ 
+    \end{tabularx}
+    }
+
+\end{frame}
+\begin{frame}{Resultados Obtenidos en Clasificación}
+    \tiny{
+    \begin{table}[htbp]
+        \centering
+        \tiny{
+        % \caption{Comparative Results of this Work vs Literature on Inbreast}
+        \label{tab:inbreast-final-result}
+        % \rowcolors{2}{green!25}{green!75}
+        % \taburowcolors{2}{Crimson!30 .. ForestGreen!40}h
+        \begin{tabu} to \textwidth{X[3] X X[0.5, c]}
+            \textbf{Article Title}	& \textbf{Authors}	& \textbf{AUC}  \\ \firsthline 
+            \rowcolor{blue}
+            \citetitle{Chougrad2018} & \textcite{Chougrad2018}  & 0.97   \\ 
+            \citetitle{Carneiro2017} & \textcite{Carneiro2017}  & 0.94   \\ 
+            \citetitle{Shams2018}    & \textcite{Shams2018}     & 0.925   \\ 
+            \citetitle{Carneiro2015} & \textcite{Carneiro2015}  & 0.91    \\ 
+            \citetitle{Dhungel2017}  & \textcite{Dhungel2017}   & 0.91    \\ 
+            \citetitle{Carneiro2017a-deeplearningmodelsformammogramclassification} & \textcite{Carneiro2017a-deeplearningmodelsformammogramclassification}  & 0.91  \\ 
+            \citetitle{zhu2017deep}  & \textcite{zhu2017deep}   & 0.89    \\ 
+            \citetitle{Hamidinekoo2018}  & \textcite{Hamidinekoo2018}   & 0.87 \\ \hline
+            \multicolumn{2}{r}{ \textbf{Literature Maximum Value:}} & \textbf{0.97}\\ 
+            \multicolumn{2}{r}{ \textbf{Literature Minimum Value:}} & 0.87\\ 
+            \multicolumn{2}{r}{ \textbf{Literature Average Value:}} & 0.92\\ 
+            \multicolumn{2}{r}{ \textbf{ \textcolor{red}{This Thesis:}}} & \textcolor{red}{\textbf{0.982}}\\  \lasthline 
+        \end{tabu}
+        }
+    \end{table}
+    }
+    
+    % Resultados obtenidos en nuestro trabajo previo \cite{LGFalconi2019}
+    % \begin{table}[]
+    % \caption{Transfer learning en CBIS-DDSM}
+    % \begin{center}
+    % \begin{tabular}{l|ll}
+    % \hline
+    % \textbf{Model} & \textbf{Roi Dataset Accuracy} & \textbf{Otsu Dataset Accuracy} \\ \hline
+    % MobileNet      & 74.3\%                        & 66.0\%                         \\ \hline
+    % Resnet50       & 78.4\%                        & 62.4\%                         \\ \hline
+    % InceptionV3    & 68.9\%                        & 67.5\%                          \\ \hline
+    % NasNet         & 73.1\%                        & 68.0\%                         \\ \hline
+    % \end{tabular}
+    % \label{tab Results}
+    % \end{center}
+    % \end{table}
+
+\end{frame}
+
+
+\begin{frame}{A modo de cierre}
+    \begin{flushright}
+        
+        \say{Me agradan los robots. Me agradan mucho más que los seres humanos. Si se
+pudiera crear un robot capaz de ser un funcionario público, creo que sería el mejor. Debido a las leyes de la robótica, sería incapaz de dañar a los humanos, ajeno a la tiranía, la corrupción, la estupidez y el prejuicio. Y después de haber realizado una gestión decente se marcharía, aunque fuera inmortal, porque le resultaría imposible dañar a los humanos permitiéndoles saber que un robot los había gobernado. Sería ideal} Dr. Susan Calvin \parencite{asimov1990cuentos} \\
+    \end{flushright}
+
+
+\end{frame}
+
+
+\begin{frame}{A modo de cierre}
+    \begin{flushleft}
+        
+        \say{¡Soy un artista creativo! Diseño y construyo artículos y libros. No se trata sólo de pensar palabras y ponerlas en el orden apropiado. Si eso fuera todo, no habría placer ni retribución en ello. Un libro debe cobrar forma en las manos del escritor. Uno debe ver el crecimiento y el desarrollo de los capítulos. Uno debe escribir y reescribir y observar cómo los cambios
+trascienden el concepto original. Es importante tener en la mano las galeradas, ver cómo quedan las frases impresas y modelarlas de nuevo. Hay un centenar de contactos entre un humano y su obra en cada etapa del juego, y el contacto mismo es placentero y compensa del trabajo que un humano vuelca en su creación. Su robot nos arrebataría todo eso.} Ninheimer \parencite{asimov1990cuentos} \\
+    \end{flushleft}
+
+
+\end{frame}
+
+\section*{Gracias}
+{
+    \setbeamertemplate{navigation symbols}{}
+    %width=\paperwidth
+    \usebackgroundtemplate{\includegraphics[width=\paperwidth]{ImagesPresentation/Thank-You-word-cloud-1024x791.jpg}}
+    \begin{frame}{}
+        
+    \end{frame}
+}
+
+% \section{Ensemble Learning}
+% \begin{frame}{Ensemble Learning}
+%     \begin{itemize}
+%         \item Ensemblemethods train multiple learners to solve the same problem.
+%         \item Try to construct a set of learners and
+% combine them to classify.
+%         \item The generalization ability of an ensemble is often much stronger than that of base learners
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Ensemble Learning}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.5\textwidth]{Images/ensemble_learning.jpg}
+%         \caption{Ensemble Learning}
+%         \label{fig: ensemblelearning}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}{Ensemble Learning}
+% \begin{itemize}
+%     \item \textbf{Statistical problem:} there may be several different hypotheses giving the same accuracy on the training data
+%     \item \textbf{Computational issue:} Many learning algorithms perform some kind of local search that may get stuck in local optima
+%     \item \textbf{Representational issue:} When the true unknownhypothesis could not be represented by any hypothesis in the hypothesis space.
+% \end{itemize}
+    
+% \end{frame}
+
+% \begin{frame}{Ensemble Learning}
+%     \begin{figure}
+%         \centering
+%         \includegraphics{Images/generalboosting.png}
+%         \caption{General Boosting}
+%         \label{fig:my_label}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}{Ensemble Learning}
+%     \begin{figure}
+%         \centering
+%         \includegraphics{Images/adaabost.png}
+%         \caption{Ada Boost}
+%         \label{fig:my_label}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}{Project Description}
+%     %\centering
+%     \begin{center}
+%         \includegraphics[height=0.7\textheight]{Images/Project_Description.png}    
+%     \end{center}
+    
+% \end{frame}
+
+% \section{Expected Outcomes}
+
+% \section{Methodology}
+% \begin{frame}{Methodology}
+%     \begin{block}{Literature Review}
+%     Literature review is conducted following Kitchenham’s methodology \cite{Kitchenham2009}.
+%     \end{block}
+%     \begin{block}{Comparative Study}
+%     Getting to know and evaluate best works found in literature.
+%     \end{block}
+%     \begin{block}{Model Design}
+%     Model based on general breast cancer CAD System\cite{Yassin2018, Jalalian2017} and Multimethodological Approach to Information Systems Research\cite{Nunamaker1990}.
+%     \end{block}
+%     \begin{block}{Evaluation}
+%     System will be evaluated with corresponding confusion matrix metrics that are common to most publications\cite{Yassin2018, Jalalian2017} 
+%     \end{block}
+% \end{frame}
+
+% \begin{frame}{Methodology}{Systems development in information systems research}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[height=0.8\textheight]{Images/mutlimethodologyis.jpg}
+%         \caption{Multimethodological Approach to Is Research\cite{Nunamaker1990}}
+%         %\label{fig:project descript}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}{Methodology}{Evaluation Criteria}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[height=0.75\textheight]{Images/confusionmatrix.png}
+%         \caption{Common Metrics in Breast CAD\cite{Jalalian2017}}
+%         %\label{fig:project descript}
+%     \end{figure}
+% \end{frame}
+% \section{Contributions}
+% \begin{frame}{Contributions}
+%     \begin{itemize}
+%         \item Contribute in the study of Application of Deep Learning in Mammograms.
+%         \item Develop a hybrid model based on Deep Learning and Texture Descriptors.
+%         \item Contribute in CAD performance
+%     \end{itemize}
+%     \begin{block}{Research Lines}
+%     \begin{itemize}
+%         \item DICC-A1-L1 Artificial Intelligence 
+%         \item DICC-A1-L2 Machine Learning
+%     \end{itemize}
+%     \end{block}
+    
+% \end{frame}
+
+% \section{Schedule}
+% \begin{frame}{Schedule}
+
+%     \includegraphics[width=1.0\textwidth]{Images/schedule.png}
+%         %\caption{Common Metrics in Breast CAD\cite{Jalalian2017}}
+%         %\label{fig:project descript}
+% \end{frame}
+    
+
+% \subsection{First Subsection}
+
+% \begin{frame}{First Slide Title}{Optional Subtitle}
+%   \begin{itemize}
+%   \item {
+%     My first point.
+%   }
+%   \item {
+%     My second point.
+%   }
+%   \end{itemize}
+% \end{frame}
+
+% \subsection{Second Subsection}
+
+
+%Examples from template
+% You can reveal the parts of a slide one at a time
+% with the \pause command:
+% \begin{frame}{Second Slide Title}
+%   \begin{itemize}
+%   \item {
+%     First item.
+%     \pause % The slide will pause after showing the first item
+%   }
+%   \item {   
+%     Second item.
+%   }
+%   % You can also specify when the content should appear
+%   % by using <n->:
+%   \item<3-> {
+%     Third item.
+%   }
+%   \item<4-> {
+%     Fourth item.
+%   }
+%   % or you can use the \uncover command to reveal general
+%   % content (not just \items):
+%   \item<5-> {
+%     Fifth item. \uncover<6->{Extra text in the fifth item.}
+%   }
+%   \end{itemize}
+% \end{frame}
+
+% \section{Second Main Section}
+
+% \subsection{Another Subsection}
+
+% \begin{frame}{Blocks}
+% \begin{block}{Block Title}
+% You can also highlight sections of your presentation in a block, with it's own title
+% \end{block}
+% \begin{theorem}
+% There are separate environments for theorems, examples, definitions and proofs.
+% \end{theorem}
+% \begin{example}
+% Here is an example of an example block.
+% \end{example}
+% \end{frame}
+
+% % Placing a * after \section means it will not show in the
+% % outline or table of contents.
+% \section*{Summary}
+
+% \begin{frame}{Summary}
+%   \begin{itemize}
+%   \item
+%     The \alert{first main message} of your talk in one or two lines.
+%   \item
+%     The \alert{second main message} of your talk in one or two lines.
+%   \item
+%     Perhaps a \alert{third message}, but not more than that.
+%   \end{itemize}
+  
+%   \begin{itemize}
+%   \item
+%     Outlook
+%     \begin{itemize}
+%     \item
+%       Something you haven't solved.
+%     \item
+%       Something else you haven't solved.
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
+
+
+
+% All of the following is optional and typically not needed. 
+%\appendix
+%\section<presentation>{\appendixname}
+%\section<presentation>{Appendix}
+%\subsection<presentation>{References}
+\section*{References}
+\begin{frame}[allowframebreaks]
+  \frametitle<presentation>{References}
+  \printbibliography
+%   \bibliographystyle{IEEEtran}   %define el stilo como ieee tran
+   % \bibliographystyle{apalike}
+   % \bibliography{proposal} %enlace al archivo donde tengo las referencias
+ 
+  %\begin{thebibliography}{10}
+    
+  %\beamertemplatebookbibitems
+  % Start with overview books.
+
+  %\bibitem{Author1990}
+   % A.~Author.
+    %\newblock {\em Handbook of Everything}.
+    %\newblock Some Press, 1990.
+ 
+    
+  %\beamertemplatearticlebibitems
+  % Followed by interesting articles. Keep the list short. 
+
+  %\bibitem{Someone2000}
+   % S.~Someone.
+    %\newblock On this and that.
+    %\newblock {\em Journal of This and That}, 2(1):50--100,
+    %2000.
+  %\end{thebibliography}
+\end{frame}
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: t
+%%% End:
