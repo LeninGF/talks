@@ -1,0 +1,64 @@
+#+options: H:2
+#+latex_class: beamer
+#+columns: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+beamer_theme: Madrid
+#+beamer_color_theme:
+#+beamer_font_theme:
+#+beamer_inner_theme:
+#+beamer_outer_theme:
+#+beamer_header:
+#+latex_header: \hypersetup{colorlinks=true, linkcolor=., urlcolor=blue, citecolor=red}
+#+title: Integración Qwen con GitHub
+#+date: 2026-04-07
+#+author: Lenin G. Falconí
+#+email: lenin.falconi@epn.edu.ec
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.3 (Org mode 9.6.15)
+#+cite_export:
+
+* ¿Qué es Qwen?
+** ¿Qué es Qwen?
+Qwen es un modelo de lenguaje de gran tamaño (LLM) desarrollado por
+Alibaba Cloud. Es capaz de comprender y generar texto en múltiples
+idiomas, incluyendo español. Ofrece capacidades avanzadas de
+razonamiento, programación y análisis.
+
+** ¿Funcionalidades de Qwen?
+- Generación de código en diversos lenguajes de programación.
+- Respuesta a preguntas complejas y resolución de problemas.
+- Traducción y comprensión de textos multilingües.
+- Asistencia en tareas de depuración y optimización de código.
+- Integración con herramientas de desarrollo como GitHub.
+* ¿Para qué sirve Qwen Coder?
+** Qwen Coder
+Qwen Coder es una versión especializada de Qwen enfocada en tareas de
+programación. Permite generar, explicar y depurar código
+automáticamente. Ideal para desarrolladores que buscan aumentar su
+productividad mediante asistencia inteligente en la escritura y
+mantenimiento de software.
+* Ejercicio de Integración
+** Integración con Github
+:PROPERTIES:
+:BEAMER_opt: allowframebreaks
+:END:
+1. Login en [[https://coder.qwen.ai/]]
+2. Abrir Codex
+3. Sincronizar con Github y Autorizar
+   1. Un repositorio específico
+   2. Todos los repositorios
+4. Añadir Entorno (/Environment/): Despliega la organización y los
+   repositorios a los que se puede acceder. Seleccionar el repositorio
+   y dar en /Submit/. 
+5. Retornar a la vista inicial de [[https://coder.qwen.ai/]]
+6. Seleccionar el entorno y colocar un prompt
+
+** Qwen Web App Dev
+
+- Se utilizó la opción de *Web Dev* para crear un entrenador Emacs
+- Fueron varios intentos hasta obtener los resultados deseados. No
+  hubo una iteración efectiva de errores.
+- La aplicación explota código HTML y JS.
+[[https://chat.qwen.ai/s/deploy/t_715b6ef6-3d43-4d5e-a1b2-e537066ff6ba][Enlace a Emacs Trainer App]]
+
